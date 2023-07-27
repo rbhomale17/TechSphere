@@ -21,7 +21,7 @@ async function sendMessage() {
 
 async function getGPT3Response(prompt) {
     try {
-        const apiKey = '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'; // Replace with your actual GPT-3.5 API key
+        const apiKey = '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'; // Replace with your actual GPT-3.5 API key
         const apiUrl = 'https://api.openai.com/v1/chat/completions'; // Use the chat-based API endpoint
 
         const headers = {
@@ -52,7 +52,51 @@ async function getGPT3Response(prompt) {
 }
 
 function addToConversation(message) {
+
     const conversationDiv = document.getElementById('conversation');
     conversationDiv.innerHTML += '<p>' + message + '</p>';
     conversationDiv.scrollTop = conversationDiv.scrollHeight;
+
+    // formating message text to text to speek operation here Rushikesh bhomale
+    {
+        // Extract AI messages and speak them
+        if (message.startsWith('AI: ')) {
+            const extractedText = message.replaceAll('AI: ', '');
+            document.getElementById('stopReadingButton').style.display = 'none';
+            document.getElementById('readResponseButton').style.display = 'inline';
+            speakText(extractedText);
+        }
+    }
+    // formating message text to text to speek operation here Rushikesh;
 }
+
+// reading Response send from serrver here 
+let isSpeaking = false;
+var utterance;
+
+function speakText(text) {
+    const speechSynthesis = window.speechSynthesis;
+    utterance = new SpeechSynthesisUtterance(text);
+    // Adjust volume and rate as needed
+    utterance.volume = 1.0; // Range from 0.0 to 1.0
+    utterance.rate = 1.0;   // Range from 0.1 to 10.0
+
+    speechSynthesis.speak(utterance);
+    isSpeaking = true;
+}
+
+function stopSpeaking() {
+    const speechSynthesis = window.speechSynthesis;
+    speechSynthesis.cancel();
+    isSpeaking = false;
+}
+
+function fetchAndReadApiResponse() {
+    // Show the "Stop Reading" button
+    stopSpeaking();
+    document.getElementById('stopReadingButton').style.display = 'inline';
+    document.getElementById('readResponseButton').style.display = 'none';
+}
+
+document.getElementById('readResponseButton').addEventListener('click', fetchAndReadApiResponse);
+// reading Response send from serrver here 
