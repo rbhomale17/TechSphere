@@ -36,22 +36,28 @@ const options = [
 ];
 
 const CustomOption = ({ innerProps, label, data }) => (
-  <div {...innerProps} style={{ display: "flex", alignItems: "center" }}>
+  <div
+    {...innerProps}
+    style={{ display: "flex", alignItems: "center", height: "50px",gap:"10px" ,width:"100%"}}
+  >
     <img
       src={data.image}
       alt={data.label}
-      style={{ width: "40px", height: "40px", marginRight: "8px" }}
+      style={{ width: "40px", height: "40px", marginBottom: "20px" }}
     />
     {label}
   </div>
 );
 
 const CustomSingleValue = ({ innerProps, label, data }) => (
-  <div {...innerProps} style={{ display: "flex", alignItems: "center" }}>
+  <div
+    {...innerProps}
+    style={{ display: "flex", alignItems: "center", height: "20px",width:"100%"}}
+  >
     <img
       src={data.image}
       alt={data.label}
-      style={{ width: "40px", height: "40px", marginRight: "8px" }}
+      style={{ width: "40px", height: "40px", marginBottom: "20px" }}
     />
     {label}
   </div>
@@ -78,7 +84,6 @@ export default function HomePage() {
     setCourse(selectedOption.value);
     setShowCheckboxes(!!selectedOption.value); // Show checkboxes if the course has a value
   };
-  //   console.log(course);
 
   return (
     <CourseProvider>
@@ -91,7 +96,7 @@ export default function HomePage() {
           styles={{
             control: (provided) => ({
               ...provided,
-              height: "10%",
+              minHeight: "10px", // Adjust the height here
               width: "100%", // Change to "100%" from "400%"
               padding: 5,
             }),
@@ -245,7 +250,7 @@ export default function HomePage() {
               {course === "OTHER INFO" && (
                 <>
                   <input
-                    class="p-3 w-100"
+                    className="p-3 w-100"
                     placeholder="Write Your Topic here"
                   />
                 </>
