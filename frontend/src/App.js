@@ -1,11 +1,16 @@
+import React from 'react';
 import './App.css';
 import HomePage from './Components/HomePage';
+import Navbar from './Components/Navbar';
+import  ContextProvider  from './Contexts/CourseContext';
 
 function App() {
   return (
     <div className="App">
-      <h1>Hello</h1>
-      <HomePage />
+      <Navbar />
+      <ContextProvider>
+        <HomePage />
+      </ContextProvider>
     </div>
   );
 }
