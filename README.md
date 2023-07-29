@@ -109,7 +109,18 @@ The Question.jsx component receives feedback data as props and displays the feed
 The ChartPage.jsx component displays a pie chart representing feedback scores. It fetches the feedback data from local storage and uses React Chart.js library to display the data in a pie chart. The feedback data is converted from an object to an array using the useState and useEffect hooks. The chart displays scores for "Conceptual Understanding," "Communication Skill," "Accuracy," and "Clarity." It also shows a table with the same scores.
 
 ## Home Page View
+<img width="1069" alt="Screenshot 2023-07-29 234858" src="https://github.com/rbhomale17/TechSphere/assets/121092445/d9784637-dfc3-487d-bf49-41dc862bf192">
 
 ## Interview Page View
+<img width="1068" alt="Screenshot 2023-07-29 235150" src="https://github.com/rbhomale17/TechSphere/assets/121092445/baf69651-0c07-4652-b350-87049572ab35">
+
+<img width="1062" alt="Screenshot 2023-07-29 235403" src="https://github.com/rbhomale17/TechSphere/assets/121092445/16af2efe-53cc-43a2-981d-78587875eb21">
+
+## Waiting for Feedback
+<img width="1066" alt="Screenshot 2023-07-29 235420" src="https://github.com/rbhomale17/TechSphere/assets/121092445/d0bc939a-cfc0-44b0-9456-b86a1c32e918">
 
 ## Feedback Page View
+<img width="1079" alt="Screenshot 2023-07-29 235443" src="https://github.com/rbhomale17/TechSphere/assets/121092445/3fbf4301-14d6-4318-97d3-e372c54f7a99">
+
+# Thank You For Visiting 😊
+
