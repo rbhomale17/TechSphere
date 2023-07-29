@@ -9,7 +9,7 @@ function App() {
       <h1>Hello</h1>
       {/* <HomePage /> */}
       <Interview category={"NodeJS"} />
-      {/* {<ChatInterface />} */}
+      {/* {<ChatInterface />} */} 
     </div>
   );
 }
