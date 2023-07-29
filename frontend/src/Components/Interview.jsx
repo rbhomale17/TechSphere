@@ -2,15 +2,18 @@ import React, { useEffect, useState } from 'react'
 // import axios from "axios";
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import { VideoComp } from './VideoComp'
-const Interview = ({category}) => {
-  const [conversationHistory, setConversationHistory] = useState([`ask me 3 ${category} ` + 'question in array format like this in an arrray format please ["question1","question2"] and make sure dont use ` this in your response any where']);
+const Interview = () => {
+  const category = JSON.parse(localStorage.getItem("category"))
+  const other = localStorage.getItem("other") || "";
+  category.category.push(other);
+  const [conversationHistory, setConversationHistory] = useState([`ask me 10 ${category.category.join(",")} ` + 'question in array format like this in an arrray format please ["question1","question2"] and make sure dont use ` this in your response any where']);
   const [userAnswer,setUserAnswer] = useState([]);
   // const [conversationHistory, setConversationHistory] = useState([]);
   console.log(conversationHistory)
   // console.log("user asnwer :",userAnswer)
   async function getGPT3Response() {
     try {
-      const apiKey = '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'; // Replace with your actual GPT-3.5 API key
+      const apiKey = 'abc'; // Replace with your actual GPT-3.5 API key
       const apiUrl = 'https://api.openai.com/v1/chat/completions'; // Use the chat-based API endpoint
       const headers = {
         'Content-Type': 'application/json',
@@ -46,7 +49,7 @@ const Interview = ({category}) => {
   }
   async function sendOwnMessage(msg) {
     try {
-      const apiKey = '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'; // Replace with your actual GPT-3.5 API key
+      const apiKey = 'abc'; // Replace with your actual GPT-3.5 API key
       const apiUrl = 'https://api.openai.com/v1/chat/completions'; // Use the chat-based API endpoint
       const headers = {
         'Content-Type': 'application/json',
@@ -118,12 +121,13 @@ const Interview = ({category}) => {
   //   "How can we read command line arguments in Node.js?",
   //   "What is callback hell in Node.js and how can it be avoided?",
   // ];
-  const arrayPattern = /\[.*?\]/;
+  const arrayPattern = /\[.*?\]/s;
   let match;
   if (conversationHistory.length >= 2) {
     match = conversationHistory[1].match(arrayPattern);
   }
   const questions = match ? JSON.parse(match[0]) : [];
+  // console.log(questions,match)
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const currentQuestion = questions[currentQuestionIndex];
   // speakText(currentQuestion);
@@ -142,9 +146,9 @@ const Interview = ({category}) => {
         updatedAnswers[currentQuestionIndex] = transcript;
         return updatedAnswers;
       });
-      if(currentQuestionIndex+1 == 3){
+      if(currentQuestionIndex+1 == 10){
         alert("Interview Ended")
-       const response = await sendOwnMessage(`this is my questions array [${questions}] and this is my answer array[${userAnswer},${transcript}]  provide me feedback for each question and also provide me the genereal feedback on the basis of conceptual understading and communication skill and other things that can be accessed make sure to give in json format only for example { "question1_feedback": "Your feedback", "question2_feedback": "Your feedback",...questionsfeedback,"general_feedback": { "conceptual_understanding": N, "communication_skill": N, "accuracy": N, "clarity": N } } here N can be anything between 0-10`);
+       const response = await sendOwnMessage(`this is my questions array [${questions}] and this is my answer array[${userAnswer},${transcript}]  provide me feedback for each question and also provide me the genereal feedback on the basis of conceptual understading and communication skill and other things that can be accessed make sure to give in json format only for example { "question1_feedback": "Your feedback", "question2_feedback": "Your feedback",...questionsfeedback,"general_feedback": { "conceptual_understanding": N, "communication_skill": N, "accuracy": N, "clarity": N } } here N can be anything between 0-10 and your feedback means generate feedback according to the question and answer`);
         
     console.log(response)
         return;

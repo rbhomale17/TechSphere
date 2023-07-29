@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Select from "react-select";
 // import CourseDetails from "./CourseDetails";
 // import CourseProvider from "../Contexts/CourseContext";
+import { useNavigate } from "react-router-dom";
+import Checkbox from "./Checkbox";
 
 const options = [
   {
@@ -36,37 +38,25 @@ const options = [
 ];
 
 const CustomOption = ({ innerProps, label, data }) => (
-  <div
-    {...innerProps}
-    style={{ display: "flex", alignItems: "center", height: "50px",gap:"10px" ,width:"100%"}}
-  >
-    <img
-      src={data.image}
-      alt={data.label}
-      style={{ width: "40px", height: "40px", marginBottom: "20px" }}
-    />
-    {label}
+  <div {...innerProps} className="flex items-center h-14 px-4">
+    <img src={data.image} alt={data.label} className="w-10 h-10 mr-4" />
+    {data.label}
   </div>
 );
 
 const CustomSingleValue = ({ innerProps, label, data }) => (
-  <div
-    {...innerProps}
-    style={{ display: "flex", alignItems: "center", height: "20px",width:"100%"}}
-  >
-    <img
-      src={data.image}
-      alt={data.label}
-      style={{ width: "40px", height: "40px", marginBottom: "20px" }}
-    />
-    {label}
+  <div {...innerProps} className="flex items-center h-8">
+    <img src={data.image} alt={data.label} className="w-8 h-8 mr-4" />
+    {data.label}
   </div>
 );
 
 export default function HomePage() {
+  const nav = useNavigate();
   const [course, setCourse] = useState("");
   const [showCheckboxes, setShowCheckboxes] = useState(false); // State to manage the visibility of checkboxes
   const [category, setCategory] = useState([]);
+  const [Text, setText] = useState("");
 
   const handleCheckBox = (e) => {
     let { value } = e.target;
@@ -84,21 +74,27 @@ export default function HomePage() {
     setCourse(selectedOption.value);
     setShowCheckboxes(!!selectedOption.value); // Show checkboxes if the course has a value
   };
-
+  const handleLocalStorageSaving = ()=>{
+    let obj = {category};
+    localStorage.setItem("category",JSON.stringify(obj));
+    localStorage.setItem("other",Text);
+    nav("/interview");
+  }
+  
+  
   return (
     // <CourseProvider>
-      <div className="flex flex-col items-center space-x-4">
-        <h1 className="text-2xl font-bold margin-auto text-gray-900">
-          Select Your Course
-        </h1>
-        <br />
+    <div className="flex items-center justify-center h-screen bg-gray-100">
+      <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-lg">
+        <h1 className="text-3xl font-bold text-gray-900 mb-6">Select Your Course</h1>
+        
         <Select
           styles={{
             control: (provided) => ({
               ...provided,
-              minHeight: "10px", // Adjust the height here
-              width: "100%", // Change to "100%" from "400%"
-              padding: 5,
+              minHeight: "40px",
+              width: "100%",
+              padding: "5px",
             }),
           }}
           options={options}
@@ -108,177 +104,61 @@ export default function HomePage() {
             Option: CustomOption,
             SingleValue: CustomSingleValue,
           }}
-        />
-        <br />
+          />
+          
         {course && showCheckboxes && (
-          <div>
-            <h2 className="text-lg font-bold text-black-600">
-              Choose your options:
-            </h2>
-            <br />
+          <div className="w-full max-w-md space-y-2">
+            <h2 className="text-lg font-bold text-black">Choose your options:</h2>
             <div className="space-y-2">
               {course === "MERN" && (
                 <>
-                  <label>
-                    <input
-                      type="checkbox"
-                      onChange={handleCheckBox}
-                      checked={category.includes("React")}
-                      value={"React"}
-                      name="React"
-                    />{" "}
-                    React
-                  </label>
-                  <br />
-                  <label>
-                    <input
-                      type="checkbox"
-                      onChange={handleCheckBox}
-                      checked={category.includes("Redux")}
-                      value={"Redux"}
-                      name="Redux"
-                    />{" "}
-                    Redux
-                  </label>
-                  <br />
-                  <label>
-                    <input
-                      type="checkbox"
-                      onChange={handleCheckBox}
-                      checked={category.includes("Hooks")}
-                      value={"Hooks"}
-                      name="Hooks"
-                    />{" "}
-                    Hooks
-                  </label>
+                  <Checkbox label="React" value="React" onChange={handleCheckBox} checked={category.includes("React")} />
+                  <Checkbox label="Redux" value="Redux" onChange={handleCheckBox} checked={category.includes("Redux")} />
+                  <Checkbox label="Hooks" value="React Hooks" onChange={handleCheckBox} checked={category.includes("React Hooks")} />
                 </>
               )}
               {course === "JAVA" && (
                 <>
-                  <label>
-                    <input
-                      type="checkbox"
-                      onChange={handleCheckBox}
-                      checked={category.includes("JAVA")}
-                      value={"JAVA"}
-                      name="JAVA"
-                    />{" "}
-                    JAVA
-                  </label>
-                  <br />
-                  <label>
-                    <input
-                      type="checkbox"
-                      onChange={handleCheckBox}
-                      checked={category.includes("MySQL")}
-                      value={"MySQL"}
-                      name="MySQL"
-                    />{" "}
-                    MySQL
-                  </label>
-                  <br />
-                  <label>
-                    <input
-                      type="checkbox"
-                      onChange={handleCheckBox}
-                      checked={category.includes("SpringBoot")}
-                      value={"SpringBoot"}
-                      name="SpringBoot"
-                    />{" "}
-                    SpringBoot
-                  </label>
-                  <br />
-                  <label>
-                    <input
-                      type="checkbox"
-                      onChange={handleCheckBox}
-                      checked={category.includes("JAVABasics")}
-                      value={"JAVABasics"}
-                      name="JAVABasics"
-                    />{" "}
-                    JAVA Basics
-                  </label>
+                  <Checkbox label="JAVA" value="JAVA" onChange={handleCheckBox} checked={category.includes("JAVA")} />
+                  <Checkbox label="MySQL" value="MySQL" onChange={handleCheckBox} checked={category.includes("MySQL")} />
+                  <Checkbox label="SpringBoot" value="SpringBoot" onChange={handleCheckBox} checked={category.includes("SpringBoot")} />
+                  <Checkbox label="JAVABasics" value="JAVABasics" onChange={handleCheckBox} checked={category.includes("JAVABasics")} />
                 </>
               )}
               {course === "NODE" && (
                 <>
-                  <label>
-                    <input
-                      type="checkbox"
-                      onChange={handleCheckBox}
-                      checked={category.includes("NodeBasic")}
-                      value={"NodeBasic"}
-                      name="NodeBasic"
-                    />{" "}
-                    Node Basic
-                  </label>
-                  <br />
-                  <label>
-                    <input
-                      type="checkbox"
-                      onChange={handleCheckBox}
-                      checked={category.includes("Express")}
-                      value={"Express"}
-                      name="Express"
-                    />{" "}
-                    Express
-                  </label>
-                  <br />
-                  <label>
-                    <input
-                      type="checkbox"
-                      onChange={handleCheckBox}
-                      checked={category.includes("MongoDB")}
-                      value={"MongoDB"}
-                      name="MongoDB"
-                    />{" "}
-                    MongoDB
-                  </label>
-                  <br />
-                  <label>
-                    <input
-                      type="checkbox"
-                      onChange={handleCheckBox}
-                      checked={category.includes("HTTP")}
-                      value={"HTTP"}
-                      name="HTTP"
-                    />{" "}
-                    HTTP
-                  </label>
+                  <Checkbox label="Node Basic" value="NodeBasic" onChange={handleCheckBox} checked={category.includes("NodeBasic")} />
+                  <Checkbox label="Express" value="Express.js" onChange={handleCheckBox} checked={category.includes("Express.js")} />
+                  <Checkbox label="MongoDB" value="MongoDB" onChange={handleCheckBox} checked={category.includes("MongoDB")} />
+                  <Checkbox label="HTTP" value="HTTP" onChange={handleCheckBox} checked={category.includes("HTTP")} />
                 </>
               )}
               {course === "OTHER INFO" && (
                 <>
                   <input
-                    className="p-3 w-100"
+                    className="p-3 w-full"
                     placeholder="Write Your Topic here"
+                    onChange={(e)=>setText(e.target.value)}
                   />
                 </>
               )}
-              {/* Add more options for other courses */}
             </div>
           </div>
         )}
-        <br />
-        <h4 className="text-xl font-bold text-black-600">
+        <h4 className="text-xl font-bold text-black mt-4">
           Selected Track:
-          <span className="text-xl font-bold text-yellow-600">
-            &nbsp;{course}
-          </span>
+          <span className="text-xl font-bold text-yellow-600">&nbsp;{course}</span>
         </h4>
-        <br />
-        <div>
+        <div className="w-full max-w-md mt-6">
           <button
-            style={{ flex: 1, padding: 15, fontSize: "25px" }}
-            className="bg-green-500 text-white rounded-lg font-bold"
+            className="w-full py-3 text-lg font-bold text-white bg-green-500 rounded-lg shadow-lg hover:bg-green-600"
+            onClick={handleLocalStorageSaving}
           >
             Start Interview
           </button>
         </div>
-        <br />
-        <br />
-        {/* <CourseDetails category={category} /> */}
       </div>
+    </div>
     // {/* </CourseProvider> */}
   );
 }
