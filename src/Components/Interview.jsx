@@ -8,13 +8,14 @@ import SpeechRecognition, {
 import { VideoComp } from "./VideoComp";
 
 const Interview = () => {
-  const [loading,setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [interviewLoading, setInterviewLoading] = useState(false);
   const category = JSON.parse(localStorage.getItem("category"));
   const other = localStorage.getItem("other") || "";
   category.category.push(other);
   const [conversationHistory, setConversationHistory] = useState([
     `ask me 10 ${category.category.join(",")} ` +
-      'question in array format like this in an arrray format please ["question1","question2"] and make sure dont use ` this in your response any where',
+    'question in array format like this in an arrray format please ["question1","question2"] and make sure dont use ` this in your response any where',
   ]);
   const [userAnswer, setUserAnswer] = useState([]);
   // const [conversationHistory, setConversationHistory] = useState([]);
@@ -40,7 +41,7 @@ const Interview = () => {
           };
         }),
       };
-
+      setInterviewLoading(true);
       const response = await fetch(apiUrl, {
         method: "POST",
         headers: headers,
@@ -54,7 +55,9 @@ const Interview = () => {
       }
 
       const responseData = await response.json();
+      setInterviewLoading(false);
       return responseData.choices[0].message.content.trim();
+
     } catch (error) {
       console.error("Error fetching response from GPT-3.5:", error);
       throw new Error("Error fetching response from GPT-3.5:", error);
@@ -182,59 +185,65 @@ const Interview = () => {
   }
   return (
     <div className="p-8">
-<h1 className="text-4xl font-bold mb-8">Interview</h1>
-      {loading ? (<div className="flex items-center justify-center h-[90vh]">
-        <h1>Wait for the Feedback</h1>
-      <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-blue-500"></div>
-    </div>) : 
-
-      (
-
-      
-      <div className="flex h-[90vh]">
-        <div className="border w-3/4 flex flex-col p-4">
-          <h1 className="text-xl font-bold mb-4">
-            Question {currentQuestionIndex + 1}: {currentQuestion}
-          </h1>
-          <p className="mb-2">Answer:</p>
-          <textarea
-            value={transcript}
-            onChange={() => {}} // Add an empty onChange handler to prevent React warning
-            cols="30"
-            rows="10"
-            className="border rounded p-2 resize-none mb-4"
-          ></textarea>
-          <div className="flex space-x-4">
-            <button
-              onClick={startListening}
-              className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
-            >
-              Start Listening
-            </button>
-            <button
-              onClick={SpeechRecognition.stopListening}
-              className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
-            >
-              Stop Listening
-            </button>
-          </div>
+      <h1 className="text-4xl font-bold mb-8">Interview</h1>
+      {interviewLoading ? (
+        <div className="flex items-center justify-center h-[90vh]">
+          <h1>Please Wait We Are Preparing Your Interview</h1>
+          <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-blue-500"></div>
         </div>
-        <div className="border w-1/4 p-4">
-          <div className="video mb-4">
-            <VideoComp />
-          </div>
-          <button
-            onClick={handleAnswerSubmission}
-            className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded w-full"
-          >
-            Submit Answer
-          </button>
-        </div>
-      </div>
-      )
-    }
+      ) : (
+        loading ? (<div className="flex items-center justify-center h-[90vh]">
+          <h1>Wait for the Feedback</h1>
+          <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-blue-500"></div>
+        </div>) :
+
+          (
+
+
+            <div className="flex h-[90vh]">
+              <div className="border w-3/4 flex flex-col p-4">
+                <h1 className="text-xl font-bold mb-4">
+                  Question {currentQuestionIndex + 1}: {currentQuestion}
+                </h1>
+                <p className="mb-2">Answer:</p>
+                <textarea
+                  value={transcript}
+                  onChange={() => { }} // Add an empty onChange handler to prevent React warning
+                  cols="30"
+                  rows="10"
+                  className="border rounded p-2 resize-none mb-4"
+                ></textarea>
+                <div className="flex space-x-4">
+                  <button
+                    onClick={startListening}
+                    className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+                  >
+                    Start Listening
+                  </button>
+                  <button
+                    onClick={SpeechRecognition.stopListening}
+                    className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
+                  >
+                    Stop Listening
+                  </button>
+                </div>
+              </div>
+              <div className="border w-1/4 p-4">
+                <div className="video mb-4">
+                  <VideoComp />
+                </div>
+                <button
+                  onClick={handleAnswerSubmission}
+                  className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded w-full"
+                >
+                  Submit Answer
+                </button>
+              </div>
+            </div>
+          )
+      )}
     </div>
-    
+
   );
 };
 
