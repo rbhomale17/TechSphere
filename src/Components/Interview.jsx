@@ -184,66 +184,61 @@ const Interview = () => {
     return null;
   }
   return (
-    <div className="p-8">
-      <h1 className="text-4xl font-bold mb-8">Interview</h1>
+    <div className="p-4 md:p-8">
+      <h1 className="text-2xl md:text-4xl font-bold mb-4">Interview</h1>
       {interviewLoading ? (
-        <div className="flex items-center justify-center h-[90vh]">
-          <h1>Please Wait We Are Preparing Your Interview</h1>
-          <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-blue-500"></div>
+        <div className="flex items-center justify-center h-[70vh]">
+          <h1>Please wait while we prepare your interview...</h1>
+          <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-blue-500"></div>
+        </div>
+      ) : loading ? (
+        <div className="flex items-center justify-center h-[70vh]">
+          <h1>Wait for the feedback...</h1>
+          <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-blue-500"></div>
         </div>
       ) : (
-        loading ? (<div className="flex items-center justify-center h-[90vh]">
-          <h1>Wait for the Feedback</h1>
-          <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-blue-500"></div>
-        </div>) :
-
-          (
-
-
-            <div className="flex h-[90vh]">
-              <div className="border w-3/4 flex flex-col p-4">
-                <h1 className="text-xl font-bold mb-4">
-                  Question {currentQuestionIndex + 1}: {currentQuestion}
-                </h1>
-                <p className="mb-2">Answer:</p>
-                <textarea
-                  value={transcript}
-                  onChange={() => { }} // Add an empty onChange handler to prevent React warning
-                  cols="30"
-                  rows="10"
-                  className="border rounded p-2 resize-none mb-4"
-                ></textarea>
-                <div className="flex space-x-4">
-                  <button
-                    onClick={startListening}
-                    className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
-                  >
-                    Start Listening
-                  </button>
-                  <button
-                    onClick={SpeechRecognition.stopListening}
-                    className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
-                  >
-                    Stop Listening
-                  </button>
-                </div>
-              </div>
-              <div className="border w-1/4 p-4">
-                <div className="video mb-4">
-                  <VideoComp />
-                </div>
-                <button
-                  onClick={handleAnswerSubmission}
-                  className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded w-full"
-                >
-                  Submit Answer
-                </button>
-              </div>
+        <div className="flex flex-col md:flex-row">
+          <div className="border md:w-3/4 flex flex-col p-4 md:mr-4">
+            <h1 className="text-xl font-bold mb-4">
+              Question {currentQuestionIndex + 1}: {currentQuestion}
+            </h1>
+            <p className="mb-2">Answer:</p>
+            <textarea
+              value={transcript}
+              onChange={() => {}}
+              cols="30"
+              rows="10"
+              className="border rounded p-2 resize-none mb-4"
+            ></textarea>
+            <div className="flex space-x-4">
+              <button
+                onClick={startListening}
+                className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+              >
+                Start Listening
+              </button>
+              <button
+                onClick={SpeechRecognition.stopListening}
+                className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
+              >
+                Stop Listening
+              </button>
             </div>
-          )
+          </div>
+          <div className="border mt-4 md:mt-0 md:w-1/4 p-4">
+            <div className="mb-4">
+              <VideoComp />
+            </div>
+            <button
+              onClick={handleAnswerSubmission}
+              className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded w-full"
+            >
+              Submit Answer
+            </button>
+          </div>
+        </div>
       )}
     </div>
-
   );
 };
 
