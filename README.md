@@ -37,7 +37,7 @@ TechSphere is a collaborative web-based Interview Assessment System that revolut
 
 
 ## Deployed Links
-- **Project Live Link:-** https://techsphere-puce.vercel.app/
+- [Project Live Link Click Here](https://techsphere-ai-interview.vercel.app)
 
 ## Getting Started
 To experience TechSphere on your local machine, follow these simple steps:
@@ -45,11 +45,6 @@ To experience TechSphere on your local machine, follow these simple steps:
    ```bash
     https://github.com/rbhomale17/TechSphere.git
    ```
-2. Navigate to the project directory in the terminal.
-   ```bash
-    cd TechSphere/frontend
-   ```
-
 ## Prerequisites
 Make sure you have the following software installed:
 - Node.js
