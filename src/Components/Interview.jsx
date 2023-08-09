@@ -184,7 +184,8 @@ const Interview = () => {
     return null;
   }
   return (
-    <div className="p-4 md:p-8">
+    <div className="p-4 md:p-8 mt-20 bg-gray-100">
+      {/* <Navbar /> Render the Navbar component */}
       <h1 className="text-2xl md:text-4xl font-bold mb-4">Interview</h1>
       {interviewLoading ? (
         <div className="flex items-center justify-center h-[70vh]">
@@ -198,7 +199,7 @@ const Interview = () => {
         </div>
       ) : (
         <div className="flex flex-col md:flex-row">
-          <div className="border md:w-3/4 flex flex-col p-4 md:mr-4">
+          <div className="border md:w-3/4 flex flex-col p-4 md:mr-4 bg-white rounded shadow-md">
             <h1 className="text-xl font-bold mb-4">
               Question {currentQuestionIndex + 1}: {currentQuestion}
             </h1>
@@ -208,7 +209,7 @@ const Interview = () => {
               onChange={() => {}}
               cols="30"
               rows="10"
-              className="border rounded p-2 resize-none mb-4"
+              className="border rounded p-2 resize-none mb-4 w-full"
             ></textarea>
             <div className="flex space-x-4">
               <button
@@ -224,8 +225,11 @@ const Interview = () => {
                 Stop Listening
               </button>
             </div>
+            <h3 className="mt-5 text-blue-700">
+              <b>Note:</b> If no questions are available or appear, please refresh the page once.
+            </h3>
           </div>
-          <div className="border mt-4 md:mt-0 md:w-1/4 p-4">
+          <div className="border mt-4 md:mt-0 md:w-1/4 p-4 bg-white rounded shadow-md">
             <div className="mb-4">
               <VideoComp />
             </div>

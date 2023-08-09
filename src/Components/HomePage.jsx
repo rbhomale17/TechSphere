@@ -84,7 +84,82 @@ export default function HomePage() {
   
   return (
     // <CourseProvider>
-    <div className="flex items-center justify-center h-screen bg-gray-100">
+    // <div className="flex items-center justify-center h-screen bg-gray-100">
+    //   <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-lg">
+    //     <h1 className="text-3xl font-bold text-gray-900 mb-6">Select Your Course</h1>
+        
+    //     <Select
+    //       styles={{
+    //         control: (provided) => ({
+    //           ...provided,
+    //           minHeight: "40px",
+    //           width: "100%",
+    //           padding: "5px",
+    //         }),
+    //       }}
+    //       options={options}
+    //       value={options.find((option) => option.value === course)}
+    //       onChange={handleChange}
+    //       components={{
+    //         Option: CustomOption,
+    //         SingleValue: CustomSingleValue,
+    //       }}
+    //       />
+          
+    //     {course && showCheckboxes && (
+    //       <div className="w-full max-w-md space-y-2">
+    //         <h2 className="text-lg font-bold text-black">Choose your options:</h2>
+    //         <div className="space-y-2">
+    //           {course === "MERN" && (
+    //             <>
+    //               <Checkbox label="React" value="React" onChange={handleCheckBox} checked={category.includes("React")} />
+    //               <Checkbox label="Redux" value="Redux" onChange={handleCheckBox} checked={category.includes("Redux")} />
+    //               <Checkbox label="Hooks" value="React Hooks" onChange={handleCheckBox} checked={category.includes("React Hooks")} />
+    //             </>
+    //           )}
+    //           {course === "JAVA" && (
+    //             <>
+    //               <Checkbox label="JAVA" value="JAVA" onChange={handleCheckBox} checked={category.includes("JAVA")} />
+    //               <Checkbox label="MySQL" value="MySQL" onChange={handleCheckBox} checked={category.includes("MySQL")} />
+    //               <Checkbox label="SpringBoot" value="SpringBoot" onChange={handleCheckBox} checked={category.includes("SpringBoot")} />
+    //               <Checkbox label="JAVABasics" value="JAVABasics" onChange={handleCheckBox} checked={category.includes("JAVABasics")} />
+    //             </>
+    //           )}
+    //           {course === "NODE" && (
+    //             <>
+    //               <Checkbox label="Node Basic" value="NodeBasic" onChange={handleCheckBox} checked={category.includes("NodeBasic")} />
+    //               <Checkbox label="Express" value="Express.js" onChange={handleCheckBox} checked={category.includes("Express.js")} />
+    //               <Checkbox label="MongoDB" value="MongoDB" onChange={handleCheckBox} checked={category.includes("MongoDB")} />
+    //               <Checkbox label="HTTP" value="HTTP" onChange={handleCheckBox} checked={category.includes("HTTP")} />
+    //             </>
+    //           )}
+    //           {course === "OTHER INFO" && (
+    //             <>
+    //               <input
+    //                 className="p-3 w-full"
+    //                 placeholder="Write Your Topic here"
+    //                 onChange={(e)=>setText(e.target.value)}
+    //               />
+    //             </>
+    //           )}
+    //         </div>
+    //       </div>
+    //     )}
+    //     <h4 className="text-xl font-bold text-black mt-4">
+    //       Selected Track:
+    //       <span className="text-xl font-bold text-yellow-600">&nbsp;{course}</span>
+    //     </h4>
+    //     <div className="w-full max-w-md mt-6">
+    //       <button
+    //         className="w-full py-3 text-lg font-bold text-white bg-green-500 rounded-lg shadow-lg hover:bg-green-600"
+    //         onClick={handleLocalStorageSaving}
+    //       >
+    //         Start Interview
+    //       </button>
+    //     </div>
+    //   </div>
+    // </div>
+        <div className="flex items-center justify-center h-screen bg-gray-100">
       <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-lg">
         <h1 className="text-3xl font-bold text-gray-900 mb-6">Select Your Course</h1>
         
@@ -104,8 +179,8 @@ export default function HomePage() {
             Option: CustomOption,
             SingleValue: CustomSingleValue,
           }}
-          />
-          
+        />
+        
         {course && showCheckboxes && (
           <div className="w-full max-w-md space-y-2">
             <h2 className="text-lg font-bold text-black">Choose your options:</h2>
@@ -145,13 +220,14 @@ export default function HomePage() {
             </div>
           </div>
         )}
+        
         <h4 className="text-xl font-bold text-black mt-4">
           Selected Track:
           <span className="text-xl font-bold text-yellow-600">&nbsp;{course}</span>
         </h4>
         <div className="w-full max-w-md mt-6">
           <button
-            className="w-full py-3 text-lg font-bold text-white bg-green-500 rounded-lg shadow-lg hover:bg-green-600"
+            className="w-full py-3 text-lg font-bold text-white bg-green-500 rounded-lg shadow-lg hover:bg-green-600 transition-colors duration-300"
             onClick={handleLocalStorageSaving}
           >
             Start Interview
