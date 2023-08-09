@@ -2,7 +2,7 @@ import React from "react";
 
 const Question = ({ feedbackData }) => {
   return (
-    <div className="container mx-auto mt-4">
+    <div className="container mx-auto mt-4 bg-white">
       <h2 className="text-xl font-semibold">Feedback Questions</h2>
       <table className="table-auto mt-2">
         <thead>
