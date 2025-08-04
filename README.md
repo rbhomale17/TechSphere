@@ -25,15 +25,15 @@ TechSphere is a collaborative web-based Interview Assessment System that revolut
 
 
 ## Team Members
-***Team Member-1 & Student Code***    : ***Rushikesh Diliprao Bhomale https://github.com/rbhomale17***
+***Team Member-1***: ***Rushikesh Diliprao Bhomale https://github.com/rbhomale17***
 
-***Team Member-2 & Student Code*** : ***Lakxya Rupeja https://github.com/LaxyaRupeja***
+***Team Member-2***: ***Lakxya Rupeja https://github.com/LaxyaRupeja***
 
-***Team Member-3 & Student Code*** : ***Goutham V https://github.com/vgoutham786***
+***Team Member-3***: ***Goutham V https://github.com/vgoutham786***
 
-***Team Member-4 & Student Code*** : ***Abhishek Raskar https://github.com/AbhishekRaskar***
+***Team Member-4***: ***Abhishek Raskar https://github.com/AbhishekRaskar***
 
-***Team Member-5 & Student Code*** : ***Ashish Meel https://github.com/Ashishmeel007***
+***Team Member-5***: ***Ashish Meel https://github.com/Ashishmeel007***
 
 
 ## Deployed Links
